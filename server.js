@@ -5,10 +5,10 @@ const fs = require('fs');
 const app = express();
 const PORT = process.env.PORT || 3000;
 // Sets up the Express app to handle data parsing
-app.use(express.static(path.join(__dirname, "/public")));
-app.use(express.static(path.join(__dirname, "/public/assets")));
-app.use(express.static(path.join(__dirname, "/public/assets/js")));
-app.use(express.static(path.join(__dirname, "/public/assets/css")));
+app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "public\assets")));
+app.use(express.static(path.join(__dirname, "public\assets\js")));
+app.use(express.static(path.join(__dirname, "public\assets\css")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -22,7 +22,7 @@ app.get("/notes", (req, res) => {
 app.get("/api/notes", (req, res) => {
     let jsonData = []
 
-    fs.readFile('./db/db.json', 'utf-8', (err, data) => {
+    fs.readFile('db/db.json', 'utf-8', (err, data) => {
         if (err) throw err
         jsonData = JSON.parse(data)
         return res.json(jsonData)
@@ -32,7 +32,7 @@ app.get("/api/notes", (req, res) => {
 app.post("/api/notes", (req, res) => {
     const newNotes = req.body;
     let jsonData = []
-    fs.readFile("./db/db.json", (err, data) => {
+    fs.readFile("db/db.json", (err, data) => {
         if (err) throw err;
         jsonData = JSON.parse(data);
         jsonData.push(newNotes);
@@ -41,7 +41,7 @@ app.post("/api/notes", (req, res) => {
             });
         const dataString = JSON.stringify(jsonData);
         fs.writeFile(
-            path.join(__dirname, "./db/db.json"), dataString, "UTF8", err => {
+            path.join(__dirname, "db/db.json"), dataString, "UTF8", err => {
                 if (err) throw err;
                 return res.json(dataString);
             }
@@ -51,7 +51,7 @@ app.post("/api/notes", (req, res) => {
 
 app.delete("/api/notes/:id", (req, res) => {
     let jsonData = []
-    fs.readFile("./db/db.json", (err, data) => {
+    fs.readFile("db/db.json", (err, data) => {
       if (err) throw err;
       jsonData = JSON.parse(data);
   
@@ -68,7 +68,7 @@ app.delete("/api/notes/:id", (req, res) => {
       const dataString = JSON.stringify(jsonData);;
   
       fs.writeFile(
-        path.join(__dirname, "./db/db.json"),
+        path.join(__dirname, "db/db.json"),
         dataString,
         "UTF8",
         function (err) {
