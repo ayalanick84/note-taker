@@ -4,9 +4,9 @@
   "description": "",
   "main": "Develop/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node Develop/server.js",
-    "watch": "nodemon Develop/server.js"
+    
+    "start": "node Develop/server.js"
+   
   },
   "author": "",
   "license": "ISC",
