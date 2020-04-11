@@ -41,7 +41,7 @@ app.post("/api/notes", (req, res) => {
             });
         const dataString = JSON.stringify(jsonData);
         fs.writeFile(
-            path.join(__dirname, "Develop\db\db.json"), dataString, "UTF8", err => {
+            path.join(__dirname, "db.json"), dataString, "UTF8", err => {
                 if (err) throw err;
                 return res.json(dataString);
             }
